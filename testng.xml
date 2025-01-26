@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="ParaBank_TestAutomation">
+        <classes>
+            <class name="ui_test.RegisterTest">
+                <methods>
+                    <include name="createNewUser"/>
+                    <include name="verifyGlobalMenu"/>
+                </methods>
+            </class>
+            <class name="ui_test.AccountServiceTest">
+                <methods>
+                    <include name="createNewAccount"/>
+                    <include name="verifyNewAccountBalance"/>
+                    <include name="transferMoneyFromNewAccount"/>
+                    <include name="billPaymentFromNewAccount"/>
+                </methods>
+            </class>
+            <class name="api_test.FindTransactionTest">
+                <methods>
+                    <include name="FindTransactionAPITest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
