@@ -7,6 +7,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.Cookie;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -40,6 +41,8 @@ public class AccountServiceTest extends Base {
     @Test
     public void createNewAccount()
     {
+        Allure.label("subSuite", "Account Service Test");
+        setName("Create a new account test");
         homePage.navigateToURL();
         homePage.clickOnRegisterLink(page);
         page.waitForTimeout(500);
@@ -63,6 +66,8 @@ public class AccountServiceTest extends Base {
     @Test(dependsOnMethods = {"createNewAccount"})
     public void verifyNewAccountBalance()
     {
+        Allure.label("subSuite", "Account Service Test");
+        setName("Verify new account's balance");
         accountPage.clickOnAccountOverview();
         accountPage.verifyAccountExist(previousAccountNumber);
         accountPage.verifyAccountBalance("$100.00");
@@ -72,6 +77,8 @@ public class AccountServiceTest extends Base {
     @Test(dependsOnMethods = {"verifyNewAccountBalance"})
     public void transferMoneyFromNewAccount()
     {
+        Allure.label("subSuite", "Account Service Test");
+        setName("Transfer money from new account");
         accountPage.clickOnTransferFunds();
         accountPage.enterAmount("5");
         accountPage.setFromAccount();
@@ -83,9 +90,9 @@ public class AccountServiceTest extends Base {
     @Test(dependsOnMethods = {"transferMoneyFromNewAccount"})
     public void billPaymentFromNewAccount()
     {
-        //page.pause();
+        Allure.label("subSuite", "Account Service Test");
+        setName("Pay bill from new account");
         page.navigate("https://parabank.parasoft.com/parabank/billpay.htm");
-        //accountPage.clickOnBillPaymentLink();
         accountPage.fillBillDetails(previousAccountNumber);
         accountPage.clickOnSubmitButton();
         accountPage.verifyBillPayment(previousAccountNumber);

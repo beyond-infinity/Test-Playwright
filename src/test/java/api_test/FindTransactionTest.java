@@ -2,6 +2,7 @@ package api_test;
 
 import api_helper.FindTransactionHelper;
 import base.Base;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
@@ -27,6 +28,8 @@ public class FindTransactionTest extends Base {
     @Test
     public void FindTransactionAPITest()
     {
+        Allure.label("subSuite", "API Test");
+        setName("Transaction API Test");
         Response response = given().baseUri(reader.getProperty("APIendpoint"))
                 .basePath(helper.endpoint.replace("{$accountNumber}",previousAccountNumber))
                 .headers(helper.setHeaders(authCookie))
@@ -34,6 +37,7 @@ public class FindTransactionTest extends Base {
                 .get();
         System.out.println(response.prettyPrint());
         io.restassured.path.json.JsonPath jsonPath = new io.restassured.path.json.JsonPath(response.print());
+        Allure.attachment("api_response.txt",response.prettyPrint());
         response.then().statusCode(200);
         assertThat(jsonPath.getInt("[0].accountId")+"", equalTo(previousAccountNumber));
         assertThat(jsonPath.getString("[0].type"), equalTo("Debit"));

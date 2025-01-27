@@ -1,6 +1,8 @@
 package base;
 
 import com.microsoft.playwright.*;
+import io.qameta.allure.Allure;
+import io.qameta.allure.AllureLifecycle;
 import utils.PropertyReader;
 
 import java.io.IOException;
@@ -10,6 +12,7 @@ public class Base {
     Page page;
     public static String authCookie;
     public static String previousAccountNumber;
+    AllureLifecycle lifecycle;
     public Browser getDriver()
     {
         Browser browser = null;
@@ -23,5 +26,11 @@ public class Base {
             e.printStackTrace();
         }
         return browser;
+    }
+
+    public void setName(String name)
+    {
+        lifecycle = Allure.getLifecycle();
+        lifecycle.updateTestCase(testResult -> testResult.setName(name));
     }
 }
