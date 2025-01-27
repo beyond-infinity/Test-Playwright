@@ -2,6 +2,7 @@ package ui_test;
 
 import base.Base;
 import com.microsoft.playwright.Page;
+import io.qameta.allure.Description;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -27,6 +28,7 @@ public class RegisterTest extends Base {
         reader = new PropertyReader("testdata/RegisterUser.properties");
     }
 
+    @Description("Register a new User with Parasoft Bank.")
     @Test
     public void createNewUser()
     {
@@ -39,6 +41,7 @@ public class RegisterTest extends Base {
 
     }
 
+    @Description("Given new user has been created.Verify the global menu on the Home Page.")
     @Test(dependsOnMethods = {"createNewUser"})
     public void verifyGlobalMenu()
     {

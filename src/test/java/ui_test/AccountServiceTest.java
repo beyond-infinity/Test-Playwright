@@ -7,6 +7,7 @@ import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.Cookie;
+import io.qameta.allure.Description;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,6 +36,7 @@ public class AccountServiceTest extends Base {
         reader = new PropertyReader("testdata/RegisterUser.properties");
     }
 
+    @Description("Create a new account with some balance.")
     @Test
     public void createNewAccount()
     {
@@ -57,6 +59,7 @@ public class AccountServiceTest extends Base {
 
     }
 
+    @Description("Verify the balance of newly created bank account using the Account Overview Page.")
     @Test(dependsOnMethods = {"createNewAccount"})
     public void verifyNewAccountBalance()
     {
@@ -65,7 +68,7 @@ public class AccountServiceTest extends Base {
         accountPage.verifyAccountBalance("$100.00");
     }
 
-
+    @Description("Transfer money from the newly created account to old account.")
     @Test(dependsOnMethods = {"verifyNewAccountBalance"})
     public void transferMoneyFromNewAccount()
     {
@@ -76,6 +79,7 @@ public class AccountServiceTest extends Base {
         accountPage.verifyTransfer();
     }
 
+    @Description("Pay a bill from the newly created account.")
     @Test(dependsOnMethods = {"transferMoneyFromNewAccount"})
     public void billPaymentFromNewAccount()
     {

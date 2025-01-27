@@ -2,6 +2,7 @@ package api_test;
 
 import api_helper.FindTransactionHelper;
 import base.Base;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,6 +23,7 @@ public class FindTransactionTest extends Base {
         reader = new PropertyReader("properties/systemProperties.properties");
     }
 
+    @Description("Given a bill payment is made using the new account, Test findTransaction API for the bill payments transaction")
     @Test
     public void FindTransactionAPITest()
     {
